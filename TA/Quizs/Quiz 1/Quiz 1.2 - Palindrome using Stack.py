@@ -57,4 +57,5 @@ def main():
     for _ in range(int(input())):
         is_palindrome(input())
 
-main()
+if __name__ == "__main__":
+    main()
