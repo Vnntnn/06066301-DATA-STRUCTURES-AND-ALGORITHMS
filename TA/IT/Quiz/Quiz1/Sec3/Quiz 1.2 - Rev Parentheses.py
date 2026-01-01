@@ -33,19 +33,29 @@ class ArrayStack:
             print(self.stack_data)
     
 def rev_parentheses(in_str):
-    s1 = ArrayStack()
-    nstr = ""
+    stack = ArrayStack()
+
     for char in in_str:
-        if char != '(':
-            nstr += char
         if char == ')':
-            while not s1.is_empty():
-                nstr += s1.pop()
+            tempStack1 = ArrayStack()
+            tempStack2 = ArrayStack()
+            while not stack.is_empty() and stack.get_stack_top() != '(':
+                tempStack1.push(stack.pop())
+            if not stack.is_empty():
+                stack.pop()
+            while not tempStack1.is_empty():
+                tempStack2.push(tempStack1.pop())
+            while not tempStack2.is_empty():
+                stack.push(tempStack2.pop())
         else:
-            s1.push(char)
-            continue
-    pass
-    
+            stack.push(char)
+
+    result = ""
+    while not stack.is_empty():
+        result = stack.pop() + result
+    print("output of ", in_str, " : ", result, sep="")
+
+
 def main():
     rev_parentheses(input())
 
